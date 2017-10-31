@@ -7,13 +7,19 @@
     "start": "cross-env NODE_ENV=dev supervisor -w server,app.js -e node,js,html app"
   },
   "dependencies": {
-    "ejs": "^2.5.7",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
-    "express": "~4.15.5"
+    "ejs": "^2.5.7",
+    "express": "~4.15.5",
+    "typescript": "^2.5.3"
   },
   "devDependencies": {
+    "@types/react": "^16.0.19",
+    "@types/react-dom": "^16.0.2",
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.5",
@@ -22,6 +28,7 @@
     "react-dom": "^16.0.0",
     "reload": "^2.2.2",
     "style-loader": "^0.19.0",
+    "ts-loader": "^3.1.1",
     "url-loader": "^0.6.2",
     "webpack": "^3.8.1",
     "webpack-dev-middleware": "^1.12.0",

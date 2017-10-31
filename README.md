@@ -19,7 +19,14 @@
 ## webpack+express实现全栈自动刷新的配置
 
 ### 目录结构
-
+Adoption|------client
+        |        |
+        |        |
+        |        |
+        |
+        |
+        |
+        |
 
 ### 相关依赖模块
 * cross-env

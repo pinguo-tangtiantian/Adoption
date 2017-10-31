@@ -6,7 +6,7 @@ var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
 
 var devConfig = {
     entry: {
-        page1: ['./client/page1', hotMiddlewareScript],
+        page1: ['./client/page1/index.tsx', hotMiddlewareScript],
         page2: ['./client/page2', hotMiddlewareScript],
     },
     output: {
@@ -15,8 +15,19 @@ var devConfig = {
         publicPath: publicPath
     },
     devtool: 'eval',
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js', '.jsx']
+    },
     module: {
         loaders: [
+            {
+                test: /\.jsx?$/,
+                loader: 'babel-loader'
+            },
+            {
+                test: /\.tsx?$/,
+                loader: 'ts-loader'
+            },
             {
             test: /\.css$/,
             loader: 'style-loader!css-loader'
