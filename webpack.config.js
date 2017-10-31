@@ -1,34 +1,30 @@
-var webpack = require("webpack");
-var path = require("path");
-// var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack');
+var path = require('path');
 
-var publicPath = 'http://localhost:3000/';
+var publicPath = '/';
 var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
 
-module.exports = {
+var devConfig = {
     entry: {
-        index: ['./public/javascripts/common.js', hotMiddlewareScript]
+        page1: ['./client/page1', hotMiddlewareScript],
+        page2: ['./client/page2', hotMiddlewareScript],
     },
     output: {
-        filename: 'bundle-[name].js',
-        path: path.resolve('./public/build'),
+        filename: './[name]/bundle.js',
+        path: path.resolve(__dirname, './public'),
         publicPath: publicPath
     },
+    devtool: 'eval',
     module: {
-        loaders: [{
-            test: /\.tsx?$/,
-            loader: 'ts-loader'
-        },{
-            test: /\.css?$/,
+        loaders: [
+            {
+            test: /\.css$/,
             loader: 'style-loader!css-loader'
         }]
-    },
-    devtool: 'source-map',
-    resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx']
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin()
     ]
+};
 
-}
+module.exports = devConfig;

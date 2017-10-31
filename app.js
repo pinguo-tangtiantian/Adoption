@@ -1,58 +1,66 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
+
+var reload = require('reload');
+var http = require('http');
+
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var ejs = require('ejs');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-
+var isDev = process.env.NODE_ENV !== 'production';	//开发环境or正式环境
 var app = express();
-
-var webpack = require('webpack'),
-	webpackDevMiddleware = require('webpack-dev-middleware'),
-	webpackHotMiddleware = require('webpack-hot-middleware'),
-	webpackDevConfig = require('./webpack.config.js');
-var compiler = webpack(webpackDevConfig);
+var port = 3000;
 
 
-app.use(webpackDevMiddleware(compiler));
-app.use(webpackHotMiddleware(compiler));
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
+//设置模板引擎
 app.engine('html', ejs.__express);
 app.set('view engine', 'html');
+app.set('views', path.join(__dirname, './server/views'));
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+//对所有视图设置本地变量
+app.locals.env = process.env.NODE_ENV || 'dev';
+app.locals.reload = true;
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-	var err = new Error('Not Found');
-	err.status = 404;
-	next(err);
-});
 
-// error handler
-app.use(function (err, req, res, next) {
-	// set locals, only providing error in development
-	res.locals.message = err.message;
-	res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-	// render the error page
-	res.status(err.status || 500);
-	res.render('error.html');
-});
+if(isDev){	//开发环境
+	var webpack = require('webpack'),
+		webpackDevMiddleware = require('webpack-dev-middleware'),
+		webpackHotMiddleware = require('webpack-hot-middleware'),
+		webpackDevConfig = require('./webpack.config.js');
 
-module.exports = app;
+	var compiler = webpack(webpackDevConfig);
+	
+	//连接编译器和服务器
+	app.use(webpackDevMiddleware(compiler, {
+		publicPath: webpackDevConfig.output.publicPath,
+		noInfo: true,
+		stats: {
+			colors: true
+		}
+	}));
+
+	app.use(webpackHotMiddleware(compiler));
+
+	require('./server/routes')(app);
+
+	//添加reload模块
+	var server = http.createServer(app);
+    reload(server, app);
+
+    server.listen(port, function(){
+        console.log('App (dev) is now running on port '+port);
+    });
+
+
+}else{
+	//设置静态文件目录
+	app.use(express.static(path.join(__dirname, 'public')));
+	require('./server/routes')(app);
+    app.listen(port, function () {
+        console.log('App (production) is now running on port '+port);
+    });
+}
+
