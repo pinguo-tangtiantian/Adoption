@@ -1,19 +1,15 @@
 import './index.css';
 
-
-console.log("this is page 1.nananan");
-
-
 interface IAppProps{};
 interface IAppState{};
 
-// if(module.hot) {
-//     module.hot.accept();
-// }
+if(module.hot) {
+    module.hot.accept();
+}
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Input from '../components/input';
+import Input from '../../components/input';
 
 class App extends React.Component<IAppProps, IAppState>{
     constructor(props:IAppProps){
@@ -26,4 +22,4 @@ class App extends React.Component<IAppProps, IAppState>{
     }
 }
 
-ReactDOM.render(<App />, document);
+ReactDOM.render(<App />, document.getElementById("app"));
