@@ -190,3 +190,31 @@ server.listen(3000, function(){
 ```
   
 这里的reload.js和前面webpack的开发环境bundle.js并不冲突，它们一个负责前端源文件变更后进行编译和刷新，另一个负责在服务器发生重启时触发延时刷新。
+
+
+## 踩坑总结
+1. 引入typescript之后，热加载模块报错
+代码：
+```javascript
+if(module.hot) {
+    module.hot.accept();
+}
+```
+  
+编译器里下划线报错：
+```javascript
+[ts] Property 'hot' does not exist on type 'NodeModule'.
+```
+解决方案：找到module的定义文件(在此项目中是./node_modules/@types/node/index.d.ts),在`declare var module: NodeModule;`后添加
+```javascript
+interface NodeModule {
+    hot: any;
+}
+```
+
+
+
+
+
+## 存在问题待解决
+1. 修改静态资源时需重新编译 并且重启服务器，效率较低
