@@ -218,3 +218,11 @@ interface NodeModule {
 
 ## 存在问题待解决
 1. 修改静态资源时需重新编译 并且重启服务器，效率较低
+
+
+
+
+## 参考资料
+1. (Express结合Webpack的全栈自动刷新)[http://acgtofe.com/posts/2016/02/full-live-reload-for-express-with-webpack]
+2. (Mac上的MySQL及其图形化管理工具安装)[http://www.jianshu.com/p/ce5dba3bc02c]
+3. (Mac下安装mysql5.7 完整步骤（图文详解）)[http://www.jb51.net/article/103841.htm]
