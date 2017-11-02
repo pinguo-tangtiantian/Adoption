@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 import './index.css';
 
 
-import Input from '../../components/input';
+import Input from '../../components/form/input';
 
 interface IAppProps{};
 interface IAppState{};
@@ -19,7 +19,7 @@ class App extends React.Component<IAppProps, IAppState>{
     }
     render(): JSX.Element{
         return(
-            <Input />
+           <div></div>
         )
     }
 }
