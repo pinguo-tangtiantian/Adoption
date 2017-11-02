@@ -24,6 +24,7 @@
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.5",
     "jsx-loader": "^0.13.2",
+    "mysql": "^2.15.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "reload": "^2.2.2",
