@@ -223,6 +223,7 @@ interface NodeModule {
 
 
 ## 参考资料
-1. (Express结合Webpack的全栈自动刷新)[http://acgtofe.com/posts/2016/02/full-live-reload-for-express-with-webpack]
-2. (Mac上的MySQL及其图形化管理工具安装)[http://www.jianshu.com/p/ce5dba3bc02c]
-3. (Mac下安装mysql5.7 完整步骤（图文详解）)[http://www.jb51.net/article/103841.htm]
+1. [Express结合Webpack的全栈自动刷新](http://acgtofe.com/posts/2016/02/full-live-reload-for-express-with-webpack)
+2. [Mac上的MySQL及其图形化管理工具安装](http://www.jianshu.com/p/ce5dba3bc02c)
+3. [Mac下安装mysql5.7 完整步骤（图文详解）](http://www.jb51.net/article/103841.htm)
+4. [express文件上传中间件Multer](https://github.com/expressjs/multer/blob/master/doc/README-zh-cn.md)
