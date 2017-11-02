@@ -8,6 +8,7 @@ var devConfig = {
     entry: {
         guide: ['./client/pages/guide/index.tsx', hotMiddlewareScript],
         home: ['./client/pages/home/index.tsx', hotMiddlewareScript],
+        upload: ['./client/pages/upload/index.tsx', hotMiddlewareScript],
     },
     output: {
         filename: './[name]/bundle.js',
