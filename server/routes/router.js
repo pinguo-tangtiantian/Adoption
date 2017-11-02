@@ -1,6 +1,7 @@
 var express = require('express'),
-router = express.Router();
+    router = express.Router();
 var path = require('path');
+var SQL = require('../conf/mysql');
 
 router.get('/', function(req, res) {
     res.render('home.html');
