@@ -9,7 +9,6 @@ import myCreateStores from './store';
 
 import Navigator from './components/common/top_nav';
 import Footer from './components/common/footer';
-import { RootApp } from './components/common/root_app';
 import { HomePage } from './components/pages/home';
 import { UploadPage } from './components/pages/upload';
 // import { GuidePage } from './components/pages/guide';
