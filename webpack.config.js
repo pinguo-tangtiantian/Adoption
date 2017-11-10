@@ -34,6 +34,7 @@ module.exports = {
         port: '3000',
         hot: true,
         inline: true,
+        // 当history使用browserHistory的时候必须配置此项
         historyApiFallback:true
     }
 }

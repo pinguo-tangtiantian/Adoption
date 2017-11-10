@@ -49,7 +49,6 @@ class Navigator extends React.Component<NavProps, NavState>{
 
 
     render(): JSX.Element {
-        console.log(this.props.header.menuOn)
         const { isLogin, menuOn } = this.props.header;
         return (
             <div className="top-nav">

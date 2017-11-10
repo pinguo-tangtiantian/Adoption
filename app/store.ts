@@ -11,6 +11,5 @@ export default function myCreateStores(){
             routing: routerReducer
         }), thunkMiddleWare
     );
-    // const store = createStore(combineReducers({...reducers}), thunkMiddleWare);
     return store;
 }
