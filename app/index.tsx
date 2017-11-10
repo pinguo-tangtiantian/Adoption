@@ -10,7 +10,7 @@ import myCreateStores from './store';
 import Navigator from './components/common/top_nav';
 import Footer from './components/common/footer';
 import { HomePage } from './components/pages/home';
-import { UploadPage } from './components/pages/upload';
+import UploadPage from './components/pages/upload';
 // import { GuidePage } from './components/pages/guide';
 import { SignPage } from './components/pages/login';
 
@@ -22,9 +22,11 @@ ReactDOM.render(
         <Router>
             <div>
                 <Navigator />
-                <Route exact path="/" component={HomePage} />
-                <Route path="/upload" component={UploadPage} />
-                <Route path="/login" component={SignPage} />
+                <div className="container">
+                    <Route exact path="/" component={HomePage} />
+                    <Route path="/upload" component={UploadPage} />
+                    <Route path="/login" component={SignPage} />
+                </div>
                 <Footer />
             </div>
         </Router>

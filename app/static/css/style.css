@@ -24,12 +24,24 @@ ul li{
 }
 
 .root{
-  padding-top: 50px;
   height: 100%;
 }
 
+.container{
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 50px;
+}
 
-
+.btn{
+  width: 80px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 5px;
+  background-color: #fff;
+  margin: 0 auto;
+}
 
 /* top navigator */
 .top-nav{
@@ -66,4 +78,63 @@ ul li{
 }
 .menu-list li>a.active{
   color: #000;
+}
+
+
+
+/* 上传页面 uploadPage */
+.photos{
+  height: 170px;
+}
+
+.btn-div .upload-tips{
+  font-size: 12px;
+  color: #666;
+}
+
+.btn-div .btn-box{
+  position: relative;
+  height: 60px;
+}
+
+.upload-img-btn,
+.upload-photo
+{
+  width: 100px;
+  height: 50px;
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+}
+
+.upload-img-btn{
+  text-align: center;
+  line-height: 50px;
+  border: 1px solid #666;
+}
+
+.upload-photo{
+  opacity: 0;
+}
+                                     
+.photos-ul{
+  height: 80px;
+  font-size: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: left;
+  align-items: center;
+  background-color: #fff;
+}
+
+.photos-ul>li{
+  height: 60px;
+  width: 60px;
+  padding: 5px;
+}
+
+.photos-ul>li img{
+  border: 1px solid #000;
+  border-radius: 5px;
+  width: 100%;
 }
