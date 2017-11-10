@@ -1,13 +1,17 @@
 import axios from 'axios';
 import { AppAction } from '../interfaces/index';
 
+
+
+axios.defaults.baseURL = "http://127.0.0.1:3001";
+
+
 /**
  * 上传动物信息
  */
-export const postAnimalData = (data: any): AppAction => {
+export const postAnimalData = (): AppAction => {
     return {
-        type: "POST_ANIMAL_DATA",
-        data: data
+        type: "POST_ANIMAL_DATA"
     }
 }
 
@@ -37,17 +41,16 @@ export const receiveAnimalError = (json: JSON): AppAction => {
 /**
  * 上传动物信息至数据库并获得返回结果
  */
-export const fetchAnimalData = (): any => {
+export const fetchAnimalData = (data: FormData): any => {
     return (dispatch: any, getState: any ) => {
-        const formDom: HTMLFormElement = document.querySelector("#upload_animal_form") as HTMLFormElement;
-        const data = new FormData(formDom);
-        console.log(data);
-        dispatch(postAnimalData(data));
-        axios.post('/upload_form', data)
+        dispatch(postAnimalData());
+        axios.post('/api/test', data)
             .then((res: any)=>{
+                console.log(res)
                 dispatch(receiveAnimalSuccess(res));
             })
             .catch((res: any)=>{
+                console.log(res)
                 dispatch(receiveAnimalError(res));
             });
     }
