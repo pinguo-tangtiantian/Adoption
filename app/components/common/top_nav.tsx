@@ -61,7 +61,7 @@ class Navigator extends React.Component<NavProps, NavState>{
                     {
                         this.state.menu.map((item) => {
                             return (
-                                <li className="menu-item" key={item.name}>
+                                <li className="menu-item" key={item.name} onClick={this.onMenuHide}>
                                     <NavLink to={item.route} >{item.name}</NavLink>
                                 </li>
                             )
