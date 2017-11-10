@@ -67,4 +67,5 @@ app.use(cors());
 
 
 ### 参考资料
-1. (nodemon：自动重启node服务)[https://github.com/remy/nodemon/]
+1. [nodemon：自动重启node服务](https://github.com/remy/nodemon/)
+2. [express文件上传中间件Multer](https://github.com/expressjs/multer)
