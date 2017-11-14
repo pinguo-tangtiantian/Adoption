@@ -1,5 +1,5 @@
 var express = require('express');
-var mysql = require('mysql');
+
 var http = require('http');
 var cors = require('cors');
 var path = require('path');
@@ -59,20 +59,7 @@ app.use(function (err, req, res, next) {
 });
 
 
-// conncet to mysql server
-var sqldb = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '123456'
-});
 
-sqldb.connect(function (err) {
-    if (err) {
-        console.error('error connecting: ' + err.stack);
-        return;
-    }
-    console.error('connected successfully');
-});
 
 //Create HTTP server.
 var server = http.createServer(app);
