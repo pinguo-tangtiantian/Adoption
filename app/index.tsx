@@ -7,6 +7,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 
 import myCreateStores from './store';
 
+import AlertBox from './components/common/alert_box';
 import Navigator from './components/common/top_nav';
 import Footer from './components/common/footer';
 import { HomePage } from './components/pages/home';
@@ -22,6 +23,7 @@ ReactDOM.render(
         <Router>
             <div>
                 <Navigator />
+                <AlertBox />
                 <div className="container">
                     <Route exact path="/" component={HomePage} />
                     <Route path="/upload" component={UploadPage} />
