@@ -44,7 +44,7 @@ export const receiveAnimalError = (json: JSON): AppAction => {
 export const fetchAnimalData = (data: FormData): any => {
     return (dispatch: any, getState: any ) => {
         dispatch(postAnimalData());
-        axios.post('/api/test', data)
+        axios.post('/api/upload_animal', data)
             .then((res: any)=>{
                 console.log(res)
                 dispatch(receiveAnimalSuccess(res));
