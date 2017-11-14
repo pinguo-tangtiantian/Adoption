@@ -1,3 +1,4 @@
+import GAD from '../../../data/dictionary';
 import * as React from 'react';
 
 interface SelectProps{
@@ -19,7 +20,7 @@ export default class Select extends React.Component<SelectProps, SelectState>{
                     {
                         item.options.map(option =>{
                             return(
-                                <option key={option} value={option}>{option}</option>
+                                <option key={option} value={GAD[item.name][option]} >{option}</option>
                             )
                         })
                     }
