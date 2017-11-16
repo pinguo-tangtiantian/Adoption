@@ -13,7 +13,7 @@ import Footer from './components/common/footer';
 import { HomePage } from './components/pages/home';
 import UploadPage from './components/pages/upload';
 // import { GuidePage } from './components/pages/guide';
-import { SignPage } from './components/pages/login';
+import SignPage from './components/pages/login';
 
 import './static/css/style.css';
 
@@ -21,14 +21,12 @@ const store: any = myCreateStores();
 ReactDOM.render(
     <Provider store={store}>
         <Router>
-            <div>
+            <div className="container">
                 <Navigator />
                 <AlertBox />
-                <div className="container">
-                    <Route exact path="/" component={HomePage} />
-                    <Route path="/upload" component={UploadPage} />
-                    <Route path="/login" component={SignPage} />
-                </div>
+                <Route exact path="/" component={HomePage} />
+                <Route path="/login" component={SignPage} />
+                <Route path="/upload" component={UploadPage} />
                 <Footer />
             </div>
         </Router>
