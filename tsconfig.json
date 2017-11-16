@@ -5,6 +5,10 @@
         "jsx": "react",
         "watch": true,
         "allowJs": true,
+        "listEmittedFiles": true,
+        "pretty": true,
+        "skipDefaultLibCheck": true,
+        "suppressExcessPropertyErrors": true,
         "lib": ["es2015", "es2017", "dom"]
     }
 }
