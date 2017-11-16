@@ -64,8 +64,17 @@ app.use(cors());
 ```
 
 
+## 数据库大量踩坑
+### 1. 在`/etc/init/d`下执行`sudo mysql start`，报错`ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)`
+
+
+
+
+
 
 
 ### 参考资料
 1. [nodemon：自动重启node服务](https://github.com/remy/nodemon/)
 2. [express文件上传中间件Multer](https://github.com/expressjs/multer)
+3. [Debian中完全卸载MySQL的方法](http://www.jb51.net/article/50884.htm)
+
