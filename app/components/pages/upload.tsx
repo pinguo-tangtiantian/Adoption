@@ -69,7 +69,7 @@ class UploadPage extends React.Component<IAppProps, IAppState>{
             const fileReader = new FileReader();
             fileReader.readAsDataURL(input.files[0]);
             fileReader.onload = (event) => {
-                const baseCode: string = event.target.result;
+                const baseCode: string = event.target['result'];
                 let photo: any = input.files[0];
                 photo.src = baseCode;
                 let statePhotos: any[] = this.state.photos;
@@ -86,7 +86,6 @@ class UploadPage extends React.Component<IAppProps, IAppState>{
     
 
     render(): JSX.Element {
-        console.log(this.state);
         return (
             <form className="upload_form" id="upload_form" encType="multipart/form-data" name="uoload_animal">
                 {
@@ -118,7 +117,7 @@ class UploadPage extends React.Component<IAppProps, IAppState>{
                                                             <input key={`photos${index}`} type="file" name="photos" multiple 
                                                                 className={`upload-photo ${index==this.state.inputFile.length-1?"":"hide"}`}
                                                                 onChange={this.onSelectPhoto} 
-                                                                onClick={(event)=> {event.target.value = null}} 
+                                                                onClick={(event)=> {event.target['value'] = null}} 
                                                             />
                                                         )
                                                     })
