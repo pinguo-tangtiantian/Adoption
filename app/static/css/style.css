@@ -31,9 +31,15 @@ ul li{
 }
 
 .container{
-  width: 80%;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
+  position: relative;
+}
+
+.container .content{
   padding-top: 50px;
+
 }
 
 .btn{
@@ -47,6 +53,7 @@ ul li{
 }
 
 .alert-view{
+  display: none;
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.6);
@@ -111,6 +118,29 @@ ul li{
   color: #000;
 }
 
+
+.footer-list{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+
+
+/* 登录页面 SignPage */
+.sign-box{
+  width: 70%;
+  padding: 30px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+}
+
+
+/* 登录页面 SignPage end */
 
 
 /* 上传页面 uploadPage */
