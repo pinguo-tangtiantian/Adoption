@@ -77,4 +77,6 @@ app.use(cors());
 1. [nodemon：自动重启node服务](https://github.com/remy/nodemon/)
 2. [express文件上传中间件Multer](https://github.com/expressjs/multer)
 3. [Debian中完全卸载MySQL的方法](http://www.jb51.net/article/50884.htm)
+4. [Debian下MySQL安装经验分享](http://www.linuxidc.com/Linux/2008-10/16513.htm)
+5. [body-parser Node.js(Express) HTTP请求体解析中间件](http://blog.csdn.net/yanyang1116/article/details/54847560)
 
