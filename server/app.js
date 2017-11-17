@@ -1,22 +1,35 @@
-var express = require('express');
 
-var http = require('http');
+var express = require('express');
 var cors = require('cors');
+var http = require('http');
 var path = require('path');
-var router = require('./router');
+var multer = require('multer');
+// var bodyParser = require('body-parser')
+
+var app = express();
+
+
+var index = require('./routes/index');
+var users = require('./routes/users');
+var api = require('./routes/api');
+
 
 var SERVERPORT = "3001";
 
 
-var app = express();
-//设置跨域请求
-app.use(cors());
 
 //Get port from environment and store in Express.
 var port = normalizePort(process.env.PORT || SERVERPORT);
 app.set('port', port);
 
-app.use('/api', router);
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+
+//设置跨域请求
+app.use(cors());
+app.use('/', index);
+app.use('/users', users);
+app.use('/api', api);
 
 
 /**
