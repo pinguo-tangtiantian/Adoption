@@ -24,9 +24,9 @@ ReactDOM.render(
             <div className="container">
                 <Navigator />
                 <AlertBox />
-                <Route exact path="/" component={HomePage} />
-                <Route path="/login" component={SignPage} />
-                <Route path="/upload" component={UploadPage} />
+                    <Route exact path="/" component={HomePage} />
+                    <Route path="/login" component={SignPage} />
+                    <Route path="/upload" component={UploadPage} />
                 <Footer />
             </div>
         </Router>

@@ -54,3 +54,5 @@ export const setLogDisplay = (signType: string): AppAction=>{
         }
     }
 }
+
+export { SignUp, SignIn, RetrievePwd, fetchAnimalData };

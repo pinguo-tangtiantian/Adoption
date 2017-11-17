@@ -87,63 +87,65 @@ class UploadPage extends React.Component<IAppProps, IAppState>{
 
     render(): JSX.Element {
         return (
-            <form className="upload_form" id="upload_form" encType="multipart/form-data" name="uoload_animal">
-                {
-                    formOptions.map((formItem, index) => {
-                        if (formItem.type == "input") {
-                            return (
-                                <Input key={formItem.item.item_name} item={formItem.item} />
-                            )
-                        } else if (formItem.type == "select") {
-                            return (
-                                <Select key={formItem.item.item_name} item={formItem.item} />
-                            )
-                        } else if (formItem.type == "check") {
-                            return (
-                                <Check key={formItem.item.item_name} item={formItem.item} />
-                            )
-                        } else if (formItem.type == "image") {
-                            return (
-                                <div className="">
-                                    <label>高清美照</label>
-                                    <div className="photos">
-                                        <div className="btn-div">
-                                            <p className="upload-tips">每次只能选择一张，最多上传6张</p>
-                                            <div className="btn-box">
-                                                <span className="upload-img-btn">上传</span>
+            <div className="content">
+                <form className="upload_form" id="upload_form" encType="multipart/form-data" name="uoload_animal">
+                    {
+                        formOptions.map((formItem, index) => {
+                            if (formItem.type == "input") {
+                                return (
+                                    <Input key={formItem.item.item_name} item={formItem.item} />
+                                )
+                            } else if (formItem.type == "select") {
+                                return (
+                                    <Select key={formItem.item.item_name} item={formItem.item} />
+                                )
+                            } else if (formItem.type == "check") {
+                                return (
+                                    <Check key={formItem.item.item_name} item={formItem.item} />
+                                )
+                            } else if (formItem.type == "image") {
+                                return (
+                                    <div className="">
+                                        <label>高清美照</label>
+                                        <div className="photos">
+                                            <div className="btn-div">
+                                                <p className="upload-tips">每次只能选择一张，最多上传6张</p>
+                                                <div className="btn-box">
+                                                    <span className="upload-img-btn">上传</span>
+                                                    {
+                                                        this.state.inputFile.map((input, index)=>{
+                                                            return (
+                                                                <input key={`photos${index}`} type="file" name="photos" multiple 
+                                                                    className={`upload-photo ${index==this.state.inputFile.length-1?"":"hide"}`}
+                                                                    onChange={this.onSelectPhoto} 
+                                                                    onClick={(event)=> {event.target['value'] = null}} 
+                                                                />
+                                                            )
+                                                        })
+                                                    }
+                                                    
+                                                </div>
+                                            </div>
+                                            <ul className="photos-ul">
                                                 {
-                                                    this.state.inputFile.map((input, index)=>{
+                                                    this.state.photos.map((photo, index) => {
                                                         return (
-                                                            <input key={`photos${index}`} type="file" name="photos" multiple 
-                                                                className={`upload-photo ${index==this.state.inputFile.length-1?"":"hide"}`}
-                                                                onChange={this.onSelectPhoto} 
-                                                                onClick={(event)=> {event.target['value'] = null}} 
-                                                            />
+                                                            <li key={`photo${index}`}>
+                                                                <img className="photo_thumb" src={photo.src} />
+                                                            </li>
                                                         )
                                                     })
                                                 }
-                                                
-                                            </div>
+                                            </ul>
                                         </div>
-                                        <ul className="photos-ul">
-                                            {
-                                                this.state.photos.map((photo, index) => {
-                                                    return (
-                                                        <li key={`photo${index}`}>
-                                                            <img className="photo_thumb" src={photo.src} />
-                                                        </li>
-                                                    )
-                                                })
-                                            }
-                                        </ul>
                                     </div>
-                                </div>
-                            )
-                        }
-                    })
-                }
-                <input type="button" value="提交" className="btn" onClick={this.onFormDataPost} />
-            </form>
+                                )
+                            }
+                        })
+                    }
+                    <input type="button" value="提交" className="btn" onClick={this.onFormDataPost} />
+                </form>
+            </div>
         )
     }
 }

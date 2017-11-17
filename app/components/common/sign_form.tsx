@@ -26,29 +26,35 @@ export class SignInView extends React.Component<SignProps, SignState>{
         this.props.actions.setLogDisplay("find_pwd");
     }
 
+    onSignIn = (event) => {
+        event.preventDefault();
+        const dom: HTMLFormElement = document.getElementById("sign_in_form") as HTMLFormElement;
+        const form: FormData = new FormData(dom);
+        this.props.actions.SignIn(form);
+    }
+
     render(): JSX.Element{
         const { signType } = this.props.signDisplay;
         return (
             <div className={`sign-box ${signType=='sign_in'?"":"hide"}`}>
-                <form className="sign-form" id="sign_up_form" encType="multipart/form-data">
+                <form className="sign-form" id="sign_in_form" encType="multipart/form-data">
                     <p>
                         <label>邮箱：</label>
-                        <input type='text' placeholder='请输入注册邮箱' />
+                        <input type='text' name="email" placeholder='请输入注册邮箱' />
                     </p>
                     <p>
                         <label>密码：</label>
-                        <input type='password' placeholder='请输入密码' />
+                        <input type='password' name="password" placeholder='请输入密码' />
                     </p>
-                </form>
                 <p>还没有账号？前去<span onClick={this.onChangeToSignUp}>注册</span></p>
-                <button onClick={this.onFindPwd}>忘记密码？</button>
-                <button>登录</button>
+                <input type="button" onClick={this.onFindPwd} value="忘记密码？" />
+                <input type="button" onClick={this.onSignIn} value="登录" />
+                </form>
             </div>
         )
     }
 }
 
-interface SignUpState{};
 
 /**
  * 注册框
@@ -62,45 +68,61 @@ export class SignUpView extends React.Component<SignProps, SignState>{
         this.props.actions.setLogDisplay("sign_in");
     }
 
+    onSignUp = (event) => {
+        event.preventDefault();
+        const dom: HTMLFormElement = document.getElementById("sign_up_form") as HTMLFormElement;
+        const form: FormData = new FormData(dom);
+        this.props.actions.SignUp(form);
+    }
+
     render(): JSX.Element{
         const { signType } = this.props.signDisplay;
         return (
             <div className={`sign-box ${signType=='sign_up'?"":"hide"}`}>
-                <form className="sign-form" id="sign_up_form" encType="multipart/form-data">
+                <form className="sign-form" id="sign_up_form" encType="multipart/form-data" name="sign_up_form">
                     <p>
                         <label>昵称：</label>
-                        <input type='text' placeholder='请输入用户名' />
+                        <input type='text' name='username' placeholder='请输入用户名' />
                     </p>
                     <p>
                         <label>邮箱：</label>
-                        <input type='text' placeholder='请输入邮箱地址' />
+                        <input type='text' name='email' placeholder='请输入邮箱地址' />
                     </p>
                     <p>
                         <label>手机号码：</label>
-                        <input type='text' placeholder='请输入手机号码' />
+                        <input type='text' name='telephone' placeholder='请输入手机号码' />
                     </p>
                     <p>
                         <label>密码：</label>
-                        <input type='password' placeholder='请输入密码' />
+                        <input type='password' name='password' placeholder='请输入密码' />
                     </p>
                     <p>
                         <label>确认密码：</label>
                         <input type='password' placeholder='请再次输入密码' />
                     </p>
-                </form>
                 <p>已有账号？前去<span onClick={this.onChangeToSignIn}>登录</span></p>
-                <button>注册</button>
+                <input type="button" onClick={this.onSignUp} value="注册" />
+                </form>
             </div>
         )
     }
 }
 
 /**
- * 注册框
+ * 找回密码
  */
 export class FindPwdView extends React.Component<SignProps, SignState>{
     constructor(props: SignProps){
         super(props);
+    }
+
+    onSendApply = (event) => {
+        event.preventDefault();
+
+        const dom: HTMLFormElement = document.getElementById("find_pwd_form") as HTMLFormElement;
+        const form:FormData = new FormData(dom);
+        // this.props.actions.
+
     }
 
     render(): JSX.Element{
@@ -108,9 +130,10 @@ export class FindPwdView extends React.Component<SignProps, SignState>{
         return (
             <div className={`sign-box ${signType=='find_pwd'?"":"hide"}`}>
                 <form className="sign-form" id="find_pwd_form" encType="multipart/form-data">
+                <p>我们将会发送一份邮件到您的邮箱，请注意查收</p>
                     <p>
                         <label>邮箱：</label>
-                        <input type='text' placeholder='请输入注册邮箱' />
+                        <input type='text' name="emai" placeholder='请输入注册邮箱' />
                     </p>
                 </form>
                 <button>找回密码</button>
