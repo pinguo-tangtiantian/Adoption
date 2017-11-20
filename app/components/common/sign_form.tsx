@@ -119,9 +119,9 @@ export class FindPwdView extends React.Component<SignProps, SignState>{
     onSendApply = (event) => {
         event.preventDefault();
 
-        const dom: HTMLFormElement = document.getElementById("find_pwd_form") as HTMLFormElement;
-        const form:FormData = new FormData(dom);
-        // this.props.actions.
+        const dom: HTMLInputElement = document.getElementById("change_email") as HTMLInputElement;
+        const email: string = dom.value;
+        this.props.actions.pwdApply(email);
 
     }
 
@@ -129,14 +129,14 @@ export class FindPwdView extends React.Component<SignProps, SignState>{
         const { signType } = this.props.signDisplay;
         return (
             <div className={`sign-box ${signType=='find_pwd'?"":"hide"}`}>
-                <form className="sign-form" id="find_pwd_form" encType="multipart/form-data">
+                <form className="sign-form" id="find_pwd_form">
                 <p>我们将会发送一份邮件到您的邮箱，请注意查收</p>
                     <p>
                         <label>邮箱：</label>
-                        <input type='text' name="emai" placeholder='请输入注册邮箱' />
+                        <input type='text' name="email" id="change_email" placeholder='请输入注册邮箱' />
                     </p>
                 </form>
-                <button>找回密码</button>
+                <button onClick={this.onSendApply}>找回密码</button>
             </div>
         )
     }

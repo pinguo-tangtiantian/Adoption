@@ -29,20 +29,3 @@ export default class SignPage extends React.Component<SignProps, SignState>{
         )
     }
 }
-/* function mapStateToProps(state: any) {
-    return {
-        signDisplay: state.reducers.changeHeaderState
-    }
-}
-
-function mapDispatchToProps(dispatch: any) {
-    return {
-        actions: bindActionCreators(actions, dispatch)
-    }
-}
-
-console.log(typeof(mapStateToProps))
-export default connect({
-    mapStateToProps,
-    mapDispatchToProps
-})(SignPage); */

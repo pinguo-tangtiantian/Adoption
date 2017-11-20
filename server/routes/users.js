@@ -116,31 +116,36 @@ router.post('/sign_in', upload.array(), function (req, res, next) {
 /**
  * 找回密码时发送邮件
  */
-router.get('/change_pwd_apply', upload.array(), function(req, res, next){
+router.get('/change_pwd_apply', function(req, res, next){
     var email = req.query.email;
     var time = new Date().getTime();
 
-    var sql = 'UPDATE user_info SET last_mdf_pwd="'+time+'" where email="'+email+'";';
-    sqldb.query(sql, function(err, rows, fields){
+    var sql1 = 'SELECT * FROM user_info where email="'+email+'";';
+    sqldb.query(sql1, function(err, rows, fields){
         if(err){
             console.log(err);
             return;
         }
+        var name = rows[0].username;
+        var token = Common.randomWord(8, 15);
+        var sql2 = 'UPDATE user_info SET last_mdf_pwd="'+time+'" where email="'+email+'";';
+        sqldb.query(sql2, function(err, rows, fields){
+            var url = 'http://127.0.0.1:3001/change_pwd?email='+email+'&md_key='+token;
+            var mailOptions = {
+                from: '798459906@qq.com',
+                to: email,
+                subject: '领养平台-找回密码',
+                html: '<div>亲爱的: ' + name + '</div><br /><p>请通过下面链接修改密码，该链接在30分钟内有效。</p><p>请<a href="' + url + '" target=_blank>点击这里</a>完成验证, 如果您无法点击此连接, 请手动拷贝下面链接地址到浏览器中:</p><p>' + url + '</p><p>如果您还有别的疑问或者不知道怎么办，请联系我:</p><p>新浪微博: @铲屎官Tritty</p><p>QQ号: 798459906</p><p>谢谢！</p>'
+            };
+        
+            transporter.sendMail(mailOptions, function (err, info) {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                res.send(info);
+            });
 
-        var url = 'http://127.0.0.1:3001/change_pwd?email='+email;
-        var mailOptions = {
-            from: '798459906@qq.com',
-            to: email,
-            subject: '领养平台-找回密码',
-            html: '<div>亲爱的: ' + name + '</div><br /><p>请通过下面链接修改密码，该链接在30分钟内有效。</p><p>请<a href="' + url + '" target=_blank>点击这里</a>完成验证, 如果您无法点击此连接, 请手动拷贝下面链接地址到浏览器中:</p><p>' + url + '</p><p>如果您还有别的疑问或者不知道怎么办，请联系我:</p><p>新浪微博: @铲屎官Tritty</p><p>QQ号: 798459906</p><p>谢谢！</p>'
-        };
-    
-        transporter.sendMail(mailOptions, function (err, info) {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            res.send(info);
         });
     })
 
