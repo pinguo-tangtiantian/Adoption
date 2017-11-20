@@ -37,7 +37,7 @@ node_modules/
 jspm_packages/
 
 # Static animal pictures
-pictures/
+server/pictures/
 
 # Typescript v1 declaration files
 typings/
