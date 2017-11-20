@@ -7,7 +7,9 @@ var Common = require('../common');
 
 var router = express.Router();
 
-
-
+router.get('/', function(req,res,next){
+    console.log("66666")
+    res.render('index.html');
+});
 
 module.exports = router;
