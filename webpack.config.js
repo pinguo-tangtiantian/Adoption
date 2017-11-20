@@ -6,7 +6,7 @@ module.exports = {
     entry: './app/index.tsx',
     output: {
         filename: "bundle.js",
-        path: path.join(__dirname, './app/page')
+        path: path.join(__dirname, './server/views')
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx']
@@ -30,7 +30,7 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin()
     ],
     devServer: {
-        contentBase: './app/',
+        contentBase: './server/views',
         port: '3000',
         hot: true,
         inline: true,

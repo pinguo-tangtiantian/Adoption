@@ -4,6 +4,7 @@ var cors = require('cors');
 var http = require('http');
 var path = require('path');
 var multer = require('multer');
+var ejs = require('ejs');
 // var bodyParser = require('body-parser')
 
 var app = express();
@@ -16,7 +17,12 @@ var api = require('./routes/api');
 
 var SERVERPORT = "3001";
 
+app.use(express.static(path.join(__dirname, 'views')));
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.engine('.html', ejs.__express);
+app.set('view engine', 'html');
 
 //Get port from environment and store in Express.
 var port = normalizePort(process.env.PORT || SERVERPORT);
@@ -30,7 +36,9 @@ app.use(cors());
 app.use('/', index);
 app.use('/users', users);
 app.use('/api', api);
-
+app.get('*', function(req, res){
+    res.sendFile(path.resolve(__dirname, 'views', 'index.html'))
+});
 
 /**
  * Normalize a port into a number, string, or false.

@@ -3,10 +3,10 @@ var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
-    entry: './app/page/index.tsx',
+    entry: './app/index.tsx',
     output: {
         filename: "bundle.js",
-        path: path.join(__dirname, './public')
+        path: path.join(__dirname, './server/views')
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx']
@@ -23,7 +23,7 @@ module.exports = {
     devtool: 'eval',
     plugins: [
         new HtmlWebpackPlugin({
-            template: './app/page/index.tmpl.html',
+            template: './app/index.tmpl.html',
             inject: 'body',
             filename: 'index.html'
         })
