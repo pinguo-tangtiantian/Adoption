@@ -63,6 +63,19 @@ app.use(cors());
     //ps:只能定在在行间，不可提取出来
 ```
 
+### 6. 打包编译后的html文件，在地址栏中输入地址后跳转时需要后端处理，故一直在加载中，无返回数据时会报错；但是如果从页面中的超链接中跳转过去边不会报错
+原因：开发时用的是browsweHistory，它使用浏览器中的 History API 用于处理 URL，这种格式的路由需要后端服务器支持并处理相应路由。   
+解决方案：  
+1. 用hashHistory代替browsweHistory。但是在react-router的文档中，只推荐在开发过程中使用hashHistory，在正式环境中使用browsweHistory。（不推荐）  
+2. 在所有的路由定义之后设置（一定要在所有的路由都定义完之后设置，因为app.get('*', ...)不会调用next()方法）:
+```javascript
+//这意味着无论前端请求任何文件，最后都会发送index.html文件过去
+//剩下的路由跳转由前端的react-router来做
+app.get('*', function (request, response){
+  response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+});
+```
+
 
 ## 数据库大量踩坑
 ### 1. 在`/etc/init/d`下执行`sudo mysql start`，报错`ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)`
