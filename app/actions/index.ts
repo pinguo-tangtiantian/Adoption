@@ -2,7 +2,7 @@ import axios from 'axios';
 import { AppAction } from '../interfaces/index';
 
 import { fetchAnimalData } from './postAnimal';
-import { SignUp, SignIn, RetrievePwd } from './sign';
+import { SignUp, SignIn, pwdApply, pwdModify } from './sign';
 /**
  * 改变菜单展开状态
  * @param menuState 菜单状态
@@ -55,4 +55,4 @@ export const setLogDisplay = (signType: string): AppAction=>{
     }
 }
 
-export { SignUp, SignIn, RetrievePwd, fetchAnimalData };
+export { SignUp, SignIn, pwdApply, pwdModify, fetchAnimalData };

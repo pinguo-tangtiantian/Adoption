@@ -7,9 +7,9 @@ axios.defaults.baseURL = "http://127.0.0.1:3001";
 /**
  * 上传用户注册信息
  */
-const postSignUpInfo = (): AppAction => {
+const signUpPending = (): AppAction => {
     return {
-        type: "POST_SIGN_UP_DATA"
+        type: "SIGN_UP_PENDING"
     }
 }
 
@@ -17,9 +17,9 @@ const postSignUpInfo = (): AppAction => {
  * 上传用户注册信息成功
  * @param json 返回数据
  */
-const receiveSignUpSuccess = (json: JSON): AppAction => {
+const signUpSuccess = (json: JSON): AppAction => {
     return {
-        type: "RECEIVE_SIGN_UP_SUCCESS",
+        type: "SIGN_UP_SUCCESS",
         data: json
     }
 }
@@ -28,9 +28,9 @@ const receiveSignUpSuccess = (json: JSON): AppAction => {
  * 上传用户注册信息失败
  * @param json 返回数据
  */
-const receiveSignUpError = (json: JSON): AppAction => {
+const signUpError = (json: JSON): AppAction => {
     return {
-        type: "RECEIVE_SIGN_UP_ERROR",
+        type: "SIGN_UP_ERROR",
         data: json
     }
 }
@@ -41,15 +41,15 @@ const receiveSignUpError = (json: JSON): AppAction => {
  */
 export const SignUp = (data: FormData): any => {
     return (dispatch: any, getState: any)=>{
-        dispatch(postSignUpInfo());
+        dispatch(signUpPending());
         axios.post('/users/sign_up', data)
             .then((res: any) => {
                 console.log(res);
-                dispatch(receiveSignUpSuccess(res.data));
+                dispatch(signUpSuccess(res.data));
             })
             .catch((res: any)=>{
                 console.log(res);
-                dispatch(receiveSignUpError(res.data));
+                dispatch(signUpError(res.data));
             });
     }
 }
@@ -62,9 +62,9 @@ export const SignUp = (data: FormData): any => {
 /**
  * 上传用户登录信息
  */
-const postSignInInfo = (): AppAction => {
+const signInPending = (): AppAction => {
     return {
-        type: "POST_SIGN_IN_DATA"
+        type: "SIGN_IN_PENDING"
     }
 }
 
@@ -72,9 +72,9 @@ const postSignInInfo = (): AppAction => {
  * 上传用户登录信息成功
  * @param json 返回数据
  */
-const receiveSignInSuccess = (json: JSON): AppAction => {
+const signInSuccess = (json: JSON): AppAction => {
     return {
-        type: "RECEIVE_SIGN_IN_SUCCESS",
+        type: "SIGN_IN_SUCCESS",
         data: json
     }
 }
@@ -83,9 +83,9 @@ const receiveSignInSuccess = (json: JSON): AppAction => {
  * 上传用户登录信息失败
  * @param json 返回数据
  */
-const receiveSignInError = (json: JSON): AppAction => {
+const signInError = (json: JSON): AppAction => {
     return {
-        type: "RECEIVE_SIGN_IN_ERROR",
+        type: "SIGN_IN_ERROR",
         data: json
     }
 }
@@ -96,13 +96,13 @@ const receiveSignInError = (json: JSON): AppAction => {
  */
 export const SignIn = (data: FormData): any => {
     return (dispatch: any, getState: any)=>{
-        dispatch(postSignInInfo());
+        dispatch(signInPending());
         axios.post('/users/sign_in', data)
             .then((res: any) => {
-                dispatch(receiveSignInSuccess(res.data));
+                dispatch(signInSuccess(res.data));
             })
             .catch((res: any)=>{
-                dispatch(receiveSignInError(res.data));
+                dispatch(signInError(res.data));
             });
     }
 }
@@ -112,9 +112,9 @@ export const SignIn = (data: FormData): any => {
 /**
  * 发送找回/修改密码申请
  */
-const sendModifyApply = (): AppAction => {
+const pwdApplyPending = (): AppAction => {
     return {
-        type: "SEND_MODIFY_APPLY"
+        type: "PWD_APPLY_PENDING"
     }
 }
 
@@ -122,9 +122,9 @@ const sendModifyApply = (): AppAction => {
  * 发送找回/修改密码申请成功
  * @param json 返回数据
  */
-const receiveApplySuccess = (json: JSON): AppAction => {
+const pwdApplySuccess = (json: JSON): AppAction => {
     return {
-        type: "RECEIVE_APPLY_SUCCESS",
+        type: "PWD_APPLY_SUCCESS",
         data: json
     }
 }
@@ -133,9 +133,9 @@ const receiveApplySuccess = (json: JSON): AppAction => {
  * 发送找回/修改密码申请失败
  * @param json 返回数据
  */
-const receiveApplyError = (json: JSON): AppAction => {
+const pwdApplyError = (json: JSON): AppAction => {
     return {
-        type: "RECEIVE_APPLY_ERROR",
+        type: "PWD_APPLY_ERROR",
         data: json
     }
 }
@@ -144,15 +144,15 @@ const receiveApplyError = (json: JSON): AppAction => {
  * 找回密码
  * @param data 找回信息
  */
-export const applyModify = (data: FormData): any => {
+export const pwdApply = (email: string): any => {
     return (dispatch: any, getState: any)=>{
-        dispatch(sendModifyApply());
-        axios.post('/api/change_pwd_apply', data)
+        dispatch(pwdApplyPending());
+        axios.get('/users/change_pwd_apply?email='+email)
             .then((res: any) => {
-                dispatch(receiveApplySuccess(res.data));
+                dispatch(pwdApplySuccess(res.data));
             })
             .catch((res: any)=>{
-                dispatch(receiveApplyError(res.data));
+                dispatch(pwdApplyError(res.data));
             });
     }
 }
@@ -164,9 +164,9 @@ export const applyModify = (data: FormData): any => {
 /**
  * 上传找回/修改密码信息
  */
-const postModifyInfo = (): AppAction => {
+const pwdModifyPending = (): AppAction => {
     return {
-        type: "POST_MODIFY_DATA"
+        type: "PWD_MODIFY_PENDING"
     }
 }
 
@@ -174,9 +174,9 @@ const postModifyInfo = (): AppAction => {
  * 上传找回密码信息成功
  * @param json 返回数据
  */
-const receiveModifySuccess = (json: JSON): AppAction => {
+const pwdModifySuccess = (json: JSON): AppAction => {
     return {
-        type: "RECEIVE_MODIFY_SUCCESS",
+        type: "PWD_MODIFY_SUCCESS",
         data: json
     }
 }
@@ -185,9 +185,9 @@ const receiveModifySuccess = (json: JSON): AppAction => {
  * 上传找回密码信息失败
  * @param json 返回数据
  */
-const receiveModifyError = (json: JSON): AppAction => {
+const pwdModifyError = (json: JSON): AppAction => {
     return {
-        type: "RECEIVE_MODIFY_ERROR",
+        type: "PWD_MODIFY_ERROR",
         data: json
     }
 }
@@ -196,15 +196,15 @@ const receiveModifyError = (json: JSON): AppAction => {
  * 找回密码
  * @param data 找回信息
  */
-export const ModifyPwd = (data: FormData): any => {
+export const pwdModify = (data: FormData): any => {
     return (dispatch: any, getState: any)=>{
-        dispatch(postModifyInfo());
+        dispatch(pwdModifyPending());
         axios.post('/api/retrieve_pwd', data)
             .then((res: any) => {
-                dispatch(receiveModifySuccess(res.data));
+                dispatch(pwdModifySuccess(res.data));
             })
             .catch((res: any)=>{
-                dispatch(receiveModifyError(res.data));
+                dispatch(pwdModifyError(res.data));
             });
     }
 }
