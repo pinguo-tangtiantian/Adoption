@@ -1,8 +1,10 @@
 import axios from 'axios';
+import Qs from 'qs';
 import { AppAction } from '../interfaces/index';
 
 
 axios.defaults.baseURL = "http://127.0.0.1:3001";
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 /**
  * 上传用户注册信息
@@ -196,10 +198,10 @@ const pwdModifyError = (json: JSON): AppAction => {
  * 找回密码
  * @param data 找回信息
  */
-export const pwdModify = (data: FormData): any => {
+export const pwdModify = (data): any => {
     return (dispatch: any, getState: any)=>{
         dispatch(pwdModifyPending());
-        axios.post('/api/retrieve_pwd', data)
+        axios.get('/users/change_pwd', data)
             .then((res: any) => {
                 dispatch(pwdModifySuccess(res.data));
             })

@@ -151,20 +151,22 @@ router.get('/change_pwd_apply', function(req, res, next){
 
 });
 
-router.post('/change_pwd', upload.array(), function(req, res, next){
-    var email = req.body.email;
-    var pwd = req.body.password;
+router.get('/change_pwd', function(req, res, next){
+    console.log(req.body)
+    console.log(req.query)
+    // var email = req.body.email;
+    // var pwd = req.body.password;
 
-    var sql = 'UPDATE user_info set password="' + pwd + '"where email="' + email + '";';
+    // var sql = 'UPDATE user_info set password="' + pwd + '"where email="' + email + '";';
 
-    sqldb.query(sql, function(err, rows, fields){
-        if (err) {
-            console.log(err);
-            return;
-        }
+    // sqldb.query(sql, function(err, rows, fields){
+    //     if (err) {
+    //         console.log(err);
+    //         return;
+    //     }
 
-        res.send("成功修改密码");
-    });
+    //     res.send("成功修改密码");
+    // });
 
 });
 
