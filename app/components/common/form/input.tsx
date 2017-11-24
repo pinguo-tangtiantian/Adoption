@@ -1,7 +1,8 @@
 import * as React from 'react';
 
 interface InputProps{
-    item: any
+    item: any,
+    onSelectToggle: any
 };
 interface InputState{};
 
@@ -10,12 +11,16 @@ export default class Input extends React.Component<InputProps, InputState>{
         super(props);
     }
 
+    onInputFocus = (e) => {
+        this.props.onSelectToggle(e);
+    }
+
     render() {
         const { item } = this.props;
         return(
             <div className="upload-item">
                 <label>{item.item_name}:</label>
-                <input name={item.name} type="text" placeholder={item.placeholder} />
+                <input name={item.name} onFocus={this.onInputFocus} type="text" placeholder={item.placeholder} />
             </div>
         )
     }
