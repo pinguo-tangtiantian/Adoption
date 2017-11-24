@@ -15,7 +15,9 @@ interface IAppProps {
 };
 interface IAppState {
     inputFile: any[]
-    photos: any[]
+    photos: any[],
+    hasSelectionShown: boolean,
+    selectionName: string
 };
 
 class UploadPage extends React.Component<IAppProps, IAppState>{
@@ -23,7 +25,9 @@ class UploadPage extends React.Component<IAppProps, IAppState>{
         super(props);
         this.state = {
             inputFile: [0,],
-            photos: []
+            photos: [],
+            hasSelectionShown: false,
+            selectionName:""
         }
     }
 
@@ -83,6 +87,42 @@ class UploadPage extends React.Component<IAppProps, IAppState>{
             return;
         }
     }
+
+    /**
+     * 选择某个选项
+     */
+    onSelectOption = () => {
+        this.setState({
+            hasSelectionShown: false,
+            selectionName: ""
+        });
+    }
+
+    /**
+     * 展开/收起下拉菜单
+     */
+    onSelectToggle = (e) =>{
+        var name = e.target.getAttribute("data-name");
+        if(!name){
+            this.setState({
+                hasSelectionShown: false,
+                selectionName: ""
+            });
+        }else{
+            if(name == this.state.selectionName){
+                this.setState({
+                    hasSelectionShown: false,
+                    selectionName: ""
+                });
+            }else{  //
+                this.setState({
+                    hasSelectionShown: true,
+                    selectionName: name
+                });
+            }
+        }
+        
+    }
     
 
     render(): JSX.Element {
@@ -93,11 +133,18 @@ class UploadPage extends React.Component<IAppProps, IAppState>{
                         formOptions.map((formItem, index) => {
                             if (formItem.type == "input") {
                                 return (
-                                    <Input key={formItem.item.item_name} item={formItem.item} />
+                                    <Input onSelectToggle={this.onSelectToggle} key={formItem.item.item_name} item={formItem.item} />
                                 )
                             } else if (formItem.type == "select") {
                                 return (
-                                    <Select key={formItem.item.item_name} item={formItem.item} />
+                                    <Select 
+                                    onSelectOption={this.onSelectOption} 
+                                    onSelectToggle={this.onSelectToggle}
+                                    key={formItem.item.item_name} 
+                                    item={formItem.item} 
+                                    show={!this.state.hasSelectionShown} 
+                                    showName={this.state.selectionName}
+                                    />
                                 )
                             } else if (formItem.type == "check") {
                                 return (
@@ -105,11 +152,10 @@ class UploadPage extends React.Component<IAppProps, IAppState>{
                                 )
                             } else if (formItem.type == "image") {
                                 return (
-                                    <div className="">
-                                        <label>高清美照</label>
+                                    <div className="upload-item">
+                                        <label>高清美照:</label>
                                         <div className="photos">
                                             <div className="btn-div">
-                                                <p className="upload-tips">每次只能选择一张，最多上传6张</p>
                                                 <div className="btn-box">
                                                     <span className="upload-img-btn">上传</span>
                                                     {
@@ -125,6 +171,7 @@ class UploadPage extends React.Component<IAppProps, IAppState>{
                                                     }
                                                     
                                                 </div>
+                                                <p className="tips">每次只能选择一张，最多上传6张</p>
                                             </div>
                                             <ul className="photos-ul">
                                                 {
@@ -143,7 +190,7 @@ class UploadPage extends React.Component<IAppProps, IAppState>{
                             }
                         })
                     }
-                    <input type="button" value="提交" className="btn" onClick={this.onFormDataPost} />
+                    <input type="button" value="提交" className="btn btn-lg" onClick={this.onFormDataPost} />
                 </form>
             </div>
         )
