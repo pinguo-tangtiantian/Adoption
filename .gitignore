@@ -38,6 +38,7 @@ jspm_packages/
 
 # Static animal pictures
 server/pictures/
+server/views/images
 
 # Typescript v1 declaration files
 typings/
