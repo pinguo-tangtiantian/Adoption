@@ -32,7 +32,6 @@
     "style-loader": "^0.19.0",
     "ts-loader": "^2.3.7",
     "typescript": "^2.5.3",
-    "typings": "^2.1.1",
     "url-loader": "^0.6.2",
     "webpack": "^3.7.1",
     "webpack-dev-server": "^2.9.2"
