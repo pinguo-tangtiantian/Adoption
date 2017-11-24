@@ -39,12 +39,13 @@ class Navigator extends React.Component<NavProps, NavState>{
         this.props.actions.updateLogState("out");
     }
 
-    onMenuShow = () => {
-        this.props.actions.updateMenuState("on");
-    }
-
-    onMenuHide = () => {
-        this.props.actions.updateMenuState("off");
+    onMenuToggle = () =>{
+        var menuOn = this.props.header.menuOn;
+        if(menuOn){
+            this.props.actions.updateMenuState("off");
+        }else{
+            this.props.actions.updateMenuState("on");
+        }
     }
 
 
@@ -52,27 +53,32 @@ class Navigator extends React.Component<NavProps, NavState>{
         const { isLogin, menuOn } = this.props.header;
         return (
             <div className="top-nav">
-                {
-                    menuOn ?
-                        <div className="menu-icon" onClick={this.onMenuHide}></div> :
-                        <div className="menu-icon" onClick={this.onMenuShow}></div>
-                }
-                <ul role="nav" className={`menu-list ${menuOn ? "show" : "hide"}`}>
-                    {
-                        this.state.menu.map((item) => {
-                            return (
-                                <li className="menu-item" key={item.name} onClick={this.onMenuHide}>
-                                    <NavLink to={item.route} >{item.name}</NavLink>
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
+                <div className="menu-icon" onClick={this.onMenuToggle}></div>
+                <div className={`menu-box ${menuOn ? "show" : "hide"}`}>
+                    <div className="menu-mask" onClick={this.onMenuToggle}></div>
+                    <div className="menu-list">
+                        <div className="user-info">
+
+                        </div>
+                        {
+                            this.state.menu.map((item) => {
+                                return (
+                                    <p className="menu-item" key={item.name} onClick={this.onMenuToggle}>
+                                        <NavLink to={item.route} >{item.name}</NavLink>
+                                    </p>
+                                )
+                            })
+                        }
+                    </div>
+                </div>
                 <div className="slogan">Take me home</div>
                 {
                     isLogin ?
                         <div className="user-avator">Tritty</div> :
-                        <div className="user-avator">登录</div>
+                        <div className="user-avator">
+                            <NavLink to="/login"className="user-icon">
+                            </NavLink>
+                        </div>
                 }
 
             </div>
