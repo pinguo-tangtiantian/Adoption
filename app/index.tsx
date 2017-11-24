@@ -26,6 +26,7 @@ ReactDOM.render(
                 <AlertBox />
                 {/* 首页 */}
                 <Route exact path="/" component={HomePage} />
+                <Route path="/home" component={HomePage} />
 
                 {/* 登录页 */}
                 <Route path="/login" component={SignPage} />
