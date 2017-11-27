@@ -39,6 +39,8 @@ jspm_packages/
 # Static animal pictures
 server/pictures/
 server/views/images
+server/util/mysql.js
+server/util/nodemailer.js
 
 # Typescript v1 declaration files
 typings/
