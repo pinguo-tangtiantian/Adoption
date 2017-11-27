@@ -5,6 +5,7 @@ var http = require('http');
 var path = require('path');
 var multer = require('multer');
 var ejs = require('ejs');
+var cookieParser = require('cookie-parser');
 // var bodyParser = require('body-parser')
 
 var app = express();
@@ -33,6 +34,9 @@ app.set('port', port);
 
 //设置跨域请求
 app.use(cors());
+
+app.use(cookieParser());
+
 app.use('/', index);
 app.use('/users', users);
 app.use('/api', api);
