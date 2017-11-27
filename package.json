@@ -7,7 +7,7 @@
     "server": "nodemon --debug server/app.js",
     "dev_me": "webpack-dev-server --config webpack.config.js",
     "dev": "webpack-dev-server --watch --inline --host 10.1.18.141",
-    "build": "rm -rf ./server/views/* && webpack --config webpack.build.config.js"
+    "build": "rm -f ./server/views/*.* && webpack --config webpack.build.config.js"
   },
   "author": "",
   "license": "ISC",
