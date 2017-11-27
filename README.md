@@ -91,5 +91,7 @@ app.get('*', function (request, response){
 2. [express文件上传中间件Multer](https://github.com/expressjs/multer)
 3. [Debian中完全卸载MySQL的方法](http://www.jb51.net/article/50884.htm)
 4. [Debian下MySQL安装经验分享](http://www.linuxidc.com/Linux/2008-10/16513.htm)
-5. [body-parser Node.js(Express) HTTP请求体解析中间件](http://blog.csdn.net/yanyang1116/article/details/54847560)
+5. [body-parser Node.js(Express)(HTTP请求体解析中间件](http://blog.csdn.net/yanyang1116/article/details/54847560)
+6. [Node.js开发入门—使用cookie保持登录](http://blog.csdn.net/foruok/article/details/47719063)
+7. [https://www.cnblogs.com/rubylouvre/archive/2012/08/19/2645644.html](https://www.cnblogs.com/rubylouvre/archive/2012/08/19/2645644.html)
 
