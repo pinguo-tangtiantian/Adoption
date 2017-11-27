@@ -94,4 +94,5 @@ app.get('*', function (request, response){
 5. [body-parser Node.js(Express)(HTTP请求体解析中间件](http://blog.csdn.net/yanyang1116/article/details/54847560)
 6. [Node.js开发入门—使用cookie保持登录](http://blog.csdn.net/foruok/article/details/47719063)
 7. [https://www.cnblogs.com/rubylouvre/archive/2012/08/19/2645644.html](https://www.cnblogs.com/rubylouvre/archive/2012/08/19/2645644.html)
+8. [git - 移除文件以及取消对文件的跟踪](http://blog.csdn.net/leedaning/article/details/44976319)
 
