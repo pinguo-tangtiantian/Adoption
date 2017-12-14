@@ -26,19 +26,19 @@ export class SignInView extends React.Component<SignProps, SignState>{
         this.props.actions.setLogDisplay("find_pwd");
     }
 
-    onSignIn = (event) => {
-        event.preventDefault();
-        const dom: HTMLFormElement = document.getElementById("sign_in_form") as HTMLFormElement;
-        const form: FormData = new FormData(dom);
-        this.props.actions.SignIn(form);
-    }
+    // onSignIn = (event) => {
+    //     event.preventDefault();
+    //     const dom: HTMLFormElement = document.getElementById("sign_in_form") as HTMLFormElement;
+    //     const form: FormData = new FormData(dom);
+    //     this.props.actions.SignIn(form);
+    // }
 
     render(): JSX.Element{
         const { signType } = this.props.signDisplay;
         return (
             <div className={`sign-box ${signType=='sign_in'?"":"hide"}`}>
                 <p className="sign-title">登 录</p>
-                <form className="sign-form" id="sign_in_form" encType="multipart/form-data">
+                <form className="sign-form" id="sign_in_form" action="http://localhost:2333/login" method="post">
                     <p>
                         {/* <label>邮箱：</label> */}
                         <input type='text' name="email" placeholder='邮箱' />
@@ -53,7 +53,7 @@ export class SignInView extends React.Component<SignProps, SignState>{
                     <span className="highlight float-right" onClick={this.onFindPwd}>忘记密码？</span>
                 </p>
                 
-                <input type="button" className="btn btn-lg" onClick={this.onSignIn} value="登录" />
+                <input type="submit" className="btn btn-lg" onSubmit={(e)=>e.preventDefault()} value="登录" />
                 </form>
             </div>
         )
