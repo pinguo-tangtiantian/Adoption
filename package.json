@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon --debug server/app.js",
+    "server": "nodemon --debug ./bin/www",
     "dev_me": "webpack-dev-server --config webpack.config.js",
     "dev": "webpack-dev-server --watch --inline --host 10.1.18.141",
     "build": "rm -f ./server/views/*.* && webpack --config webpack.build.config.js"
@@ -33,7 +33,6 @@
     "ts-loader": "^2.3.7",
     "typescript": "^2.5.3",
     "url-loader": "^0.6.2",
-    "webpack": "^3.7.1",
     "webpack-dev-server": "^2.9.2"
   },
   "dependencies": {
@@ -47,8 +46,13 @@
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "ejs": "^2.5.7",
+    "jsonwebtoken": "^8.1.0",
+    "morgan": "^1.9.0",
     "nodemailer": "^4.4.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "prop-types": "^15.6.0",
+    "randomatic": "^2.0.0",
     "react": "^15.6.2",
     "react-dom": "^15.6.2",
     "react-redux": "^5.0.6",
@@ -56,6 +60,8 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "serve-favicon": "^2.4.5",
+    "validator": "^9.2.0"
   }
 }
