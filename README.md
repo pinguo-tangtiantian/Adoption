@@ -77,12 +77,25 @@ app.get('*', function (request, response){
 ```
 
 
-## 数据库大量踩坑
-### 1. 在`/etc/init/d`下执行`sudo mysql start`，报错`ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)`
 
 
-
-
+## use passport.js to authenticate in react app
+### 一. 相关依赖
+* bcrypt——用于生成hash密码的加密算法实现
+* jsonwebtoken——JSON Web Token的标砖实现
+* passport——灵活的鉴权库
+* passport-local——通过邮箱和密码进行鉴权的通行策略
+* express-validator——express下的专用验证中间件
+### 二.实现步骤
+1. 安装相关依赖
+2. 定义本地通行策略（server/util/passport.js）
+3. 定义鉴权检验工具（server/util/auth-check.js）
+4. 定义表单检验工具（server/util/validator.js）
+5. 更新app入口文件（server/app.js）
+    5.1. app中挂载passport中间件：`app.use(passport.initialize());`    
+    5.2. 加载并挂载本地通行策略
+    5.3. 挂载鉴权检验中间件
+    5.4. 处理路由
 
 
 
@@ -95,4 +108,6 @@ app.get('*', function (request, response){
 6. [Node.js开发入门—使用cookie保持登录](http://blog.csdn.net/foruok/article/details/47719063)
 7. [https://www.cnblogs.com/rubylouvre/archive/2012/08/19/2645644.html](https://www.cnblogs.com/rubylouvre/archive/2012/08/19/2645644.html)
 8. [git - 移除文件以及取消对文件的跟踪](http://blog.csdn.net/leedaning/article/details/44976319)
+9. [使用Json Web Token设计Passport系统](https://www.cnblogs.com/binyue/p/4812798.html)
+
 
