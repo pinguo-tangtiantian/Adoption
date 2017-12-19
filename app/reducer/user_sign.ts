@@ -37,7 +37,7 @@ export default function userSign(state: any={
         }
         case "SIGN_IN_SUCCESS": { //登录成功
             return Object.assign({}, state, { 
-                signType: "sign_om",
+                signType: "sign_in",
                 pending: false,
                 success: true,
                 data: action.data

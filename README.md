@@ -109,5 +109,6 @@ app.get('*', function (request, response){
 7. [https://www.cnblogs.com/rubylouvre/archive/2012/08/19/2645644.html](https://www.cnblogs.com/rubylouvre/archive/2012/08/19/2645644.html)
 8. [git - 移除文件以及取消对文件的跟踪](http://blog.csdn.net/leedaning/article/details/44976319)
 9. [使用Json Web Token设计Passport系统](https://www.cnblogs.com/binyue/p/4812798.html)
+10. [Authentication in React Applications, Part 2: JSON Web Token (JWT)](https://vladimirponomarev.com/blog/authentication-in-react-apps-jwt)
 
 

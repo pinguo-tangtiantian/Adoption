@@ -17,25 +17,45 @@ import SignPage from './components/pages/login';
 import ModifyPwd from './components/pages/modify_pwd';
 import './static/css/style.css';
 
+
+
+
+
+
+
+const routes = {
+    home: ()=>{ 
+        return <HomePage />
+    },
+    login: ()=>{
+        return <SignPage />
+    },
+    upload: ()=>{
+        return <UploadPage />
+    },
+    modify_pwd: ()=>{
+        return <ModifyPwd />
+    },
+}
 const store: any = myCreateStores();
 ReactDOM.render(
     <Provider store={store}>
-        <Router>
+        <Router >
             <div className="container">
                 <Navigator />
                 <AlertBox />
                 {/* 首页 */}
-                <Route exact path="/" component={HomePage} />
+                <Route exact path="/" render={routes.home} />
                 <Route path="/home" component={HomePage} />
 
                 {/* 登录页 */}
-                <Route path="/login" component={SignPage} />
+                <Route path="/login" render={routes.login} />
 
                 {/* 上传动物信息页 */}
-                <Route path="/upload" component={UploadPage} />
+                <Route path="/upload" component={routes.upload} />
 
                 {/* 修改密码页面 */}
-                <Route path="/modify_pwd" component={ModifyPwd} />
+                <Route path="/modify_pwd" component={routes.modify_pwd} />
                 <Footer />
             </div>
         </Router>

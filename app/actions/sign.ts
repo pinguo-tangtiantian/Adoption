@@ -3,7 +3,7 @@ import Qs from 'qs';
 import { AppAction } from '../interfaces/index';
 
 
-axios.defaults.baseURL = "http://127.0.0.1:3001";
+// axios.defaults.baseURL = "http://127.0.0.1:3001";
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 /**
@@ -46,12 +46,11 @@ export const SignUp = (data: FormData): any => {
         dispatch(signUpPending());
         axios.post('/users/sign_up', data)
             .then((res: any) => {
-                console.log(res);
+                
                 dispatch(signUpSuccess(res.data));
             })
-            .catch((res: any)=>{
-                console.log(res);
-                dispatch(signUpError(res.data));
+            .catch((error: any)=>{
+                dispatch(signUpError(error.message));
             });
     }
 }
@@ -94,17 +93,21 @@ const signInError = (json: JSON): AppAction => {
 
 /**
  * 用户登录
- * @param data 登录信息
+ * @param user 登录信息
  */
-export const SignIn = (data: FormData): any => {
+export const SignIn = (user: any): any => {
     return (dispatch: any, getState: any)=>{
         dispatch(signInPending());
-        axios.post('/users/sign_in', data)
+        axios.post('http://localhost:2333/user/login', user)
             .then((res: any) => {
-                dispatch(signInSuccess(res.data));
+                if(res.data.status == "0000"){
+                    dispatch(signInSuccess(res.data));
+                }else{
+                    dispatch(signInError(res.data));
+                }
             })
-            .catch((res: any)=>{
-                dispatch(signInError(res.data));
+            .catch((error: any)=>{
+                dispatch(signInError(error.message));
             });
     }
 }

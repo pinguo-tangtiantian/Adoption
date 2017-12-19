@@ -6,9 +6,12 @@ import * as actions from '../../actions';
 
 interface SignProps{
     signDisplay: any,
-    actions: any
+    actions: any,
+    userSign: any
 };
-interface SignState{};
+interface SignState{
+    userInfo: any
+};
 
 /**
  * 登录框
@@ -16,6 +19,9 @@ interface SignState{};
 export class SignInView extends React.Component<SignProps, SignState>{
     constructor(props: SignProps){
         super(props);
+        this.state = {
+            userInfo: {}
+        }
     }
 
     onChangeToSignUp = () =>{
@@ -26,26 +32,35 @@ export class SignInView extends React.Component<SignProps, SignState>{
         this.props.actions.setLogDisplay("find_pwd");
     }
 
-    // onSignIn = (event) => {
-    //     event.preventDefault();
-    //     const dom: HTMLFormElement = document.getElementById("sign_in_form") as HTMLFormElement;
-    //     const form: FormData = new FormData(dom);
-    //     this.props.actions.SignIn(form);
-    // }
+    onUserChange = (event) => {
+        const field = event.target.name;
+        const user = this.state.userInfo;
+        user[field] = event.target.value;
+    
+        this.setState({
+            userInfo: user
+        });
+    }
+
+    onSignIn = (event) => {
+        const { userInfo } = this.state;
+        this.props.actions.SignIn(userInfo);
+    }
 
     render(): JSX.Element{
         const { signType } = this.props.signDisplay;
+        const { success } = this.props.userSign;
         return (
             <div className={`sign-box ${signType=='sign_in'?"":"hide"}`}>
                 <p className="sign-title">登 录</p>
-                <form className="sign-form" id="sign_in_form" action="http://localhost:2333/login" method="post">
+                <form className="sign-form" id="sign_in_form">
                     <p>
                         {/* <label>邮箱：</label> */}
-                        <input type='text' name="email" placeholder='邮箱' />
+                        <input type='text' name="email" placeholder='邮箱' onChange={this.onUserChange} />
                     </p>
                     <p>
                         {/* <label>密码：</label> */}
-                        <input type='password' name="password" placeholder='密码' />
+                        <input type='password' name="password" placeholder='密码' onChange={this.onUserChange}/>
                     </p>
                 <p className="tips">
                     还没有账号？前去
@@ -53,8 +68,9 @@ export class SignInView extends React.Component<SignProps, SignState>{
                     <span className="highlight float-right" onClick={this.onFindPwd}>忘记密码？</span>
                 </p>
                 
-                <input type="submit" className="btn btn-lg" onSubmit={(e)=>e.preventDefault()} value="登录" />
+                <input type="button" className="btn btn-lg" value="登录" onClick={this.onSignIn} />
                 </form>
+                {success&&<p>登录成功</p>}
             </div>
         )
     }
@@ -82,6 +98,7 @@ export class SignUpView extends React.Component<SignProps, SignState>{
 
     render(): JSX.Element{
         const { signType } = this.props.signDisplay;
+        console.log(this.props.userSign)
         return (
             <div className={`sign-box ${signType=='sign_up'?"":"hide"}`}>
                 <form className="sign-form" id="sign_up_form" encType="multipart/form-data" name="sign_up_form">
@@ -149,7 +166,8 @@ export class FindPwdView extends React.Component<SignProps, SignState>{
 
 function mapStateToProps(state: any) {
     return {
-        signDisplay: state.reducers.changeSignDisplay
+        signDisplay: state.reducers.changeSignDisplay,
+        userSign: state.reducers.userSign
     }
 }
 

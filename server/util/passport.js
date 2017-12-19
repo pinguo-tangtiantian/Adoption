@@ -2,26 +2,57 @@ var jwt = require('jsonwebtoken');
 const LocalStrategy = require('passport-local').Strategy;
 const sqldb = require('./mysql');
 
-function passprtMysql(passport) {
+module.exports = {
+    localLogin: new LocalStrategy({
+        //local strategy默认使用username和password，我们用email重写username
+        usernameField: 'email',
+        passwordFeild: 'password',
+        session: false,
+        passReqToCallback: true //允许将整个请求发送给回调函数
+    },
+        function (req, email, password, done) {
+            //通过邮箱地址找到该用户
+            sqldb.query("SELECT * from user_info where email='" + email + "'", function (err, rows) {
+                //查询错误
+                if (err) {
+                    return done(err);
+                }
 
-/*     //为会话序列化用户信息
-    passport.serializeUser(function (user, done) {
-        done(null, "");
-    });
+                //未找到用户
+                if (!rows.length) {
+                    var error = new Error();
+                    error.name = "IncorrectLoginEmail";
+                    error.message = "该用户不存在";
+                    error.status = "1001";
+                    return done(error);
+                }
 
-    //反序列化用户信息
-    passport.deserializeUser(function (id, done) {
-        sqldb.query("SELECT * from user_info where id=" + id, function (err, rows) {
-            done(err, rows[0]);
-        })
-    }); */
+                //找到用户但是密码错误
+                if (!(rows[0].password == password)) {
+                    var error = new Error();
+                    error.name = "IncorrectLoginPassword";
+                    error.message = "密码错误";
+                    error.number = "1002";
+                    return done(error);
+                }
 
+                console.log(rows[0]);
+                var payload = {
+                    sub: rows[0].id
+                };
 
+                //创建token字符串
+                var token = jwt.sign(payload, "Tang.Tritty&Zhang.Fregie@tritty.top");
+                var data = {
+                    name: rows[0].username
+                }
+                //万事俱备，只欠东风，返回正确用户
+                return done(null, token, data);
+            });
+        }
+    ),
 
-    // =========================================================================
-    // 本地注册 ============================================================
-
-    passport.use('local-signup', new LocalStrategy({
+    localSignup: new LocalStrategy({
         //local strategy默认使用username和password，我们将会用email重写username
         usernameField: 'email',
         passwordFeild: 'password',
@@ -66,55 +97,6 @@ function passprtMysql(passport) {
             })
         }
 
-    ));
-
-    // =========================================================================
-    // 本地登录 ============================================================
-    passport.use('local-login', new LocalStrategy({
-        //local strategy默认使用username和password，我们用email重写username
-        usernameField: 'email',
-        passwordFeild: 'password',
-        session: false,
-        passReqToCallback: true //允许将整个请求发送给回调函数
-    },
-        function (req, email, password, done) {
-            //通过邮箱地址找到该用户
-            sqldb.query("SELECT * from user_info where email='" + email + "'", function (err, rows) {
-                //查询错误
-                if (err) {
-                    return done(err);
-                }
-
-                //未找到用户
-                if (!rows.length) {
-                    var error = new Error('该用户不存在');
-                    error.name = "IncorrectLoginEmail";
-                    return done(error);
-                }
-
-                //找到用户但是密码错误
-                if (!(rows[0].password == password)) {
-                    var error = new Error('密码错误');
-                    error.name = "IncorrectLoginPassword";
-                    return done(error);
-                }
-
-                console.log(rows[0]);
-                var payload = {
-                    sub: rows[0].id
-                };
-
-                //创建token字符串
-                var token = jwt.sign(payload, "Tang.Tritty&Zhang.Fregie@tritty.top");
-                var data = {
-                    name: rows[0].username
-                }
-                //万事俱备，只欠东风，返回正确用户
-                return done(null, token, data);
-            });
-        }
-    ));
+    )
 }
 
-
-module.exports = passprtMysql;
