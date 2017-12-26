@@ -119,7 +119,7 @@ router.post('/sign_in', upload.array(), function (req, res, next) {
                             console.log(err);
                             return;
                         }
-                        res.cookie("account", { account: email, hash: hash, last: lastLoginTime }, { maxAge: 60000 }, { domain: 'http://127.0.0.1'});
+                        res.cookie("account", { account: email, hash: hash, last: lastLoginTime, maxAge: 1000*60*60*48, httpOnly: false });
                         res.redirect('/home');
                         console.log("after redirect");
                     });
